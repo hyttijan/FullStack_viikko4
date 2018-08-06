@@ -64,9 +64,9 @@ const listHelper = require('../utils/list_helpers')
   const emptyBlogs = []
 
 test('dummy is called', () => {
-  const blogs = []
+  const dummyBlogs = []
 
-  const result = listHelper.dummy(blogs)
+  const result = listHelper.dummy(dummyBlogs)
   expect(result).toBe(1)
 })
 
@@ -144,3 +144,4 @@ describe("most likes",()=>{
 
 
 })
+module.exports = blogs

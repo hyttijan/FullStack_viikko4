@@ -6,6 +6,8 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const blogsRouter = require('./controllers/blogs')
+const usersRouter = require('./controllers/users')
+
 const config = require('./utils/config')
 mongoose.connect(config.mongoUrl).then((response)=>{
   console.log('connected to database',config.mongoUrl)
@@ -15,12 +17,13 @@ mongoose.connect(config.mongoUrl).then((response)=>{
 
 app.use(cors())
 app.use(bodyParser.json())
+app.use('/api/users',usersRouter)
 app.use('/api/blogs',blogsRouter)
 
 
 const server = http.createServer(app)
 
-const PORT = 3003
+const PORT = config.port
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
