@@ -7,7 +7,8 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const blogsRouter = require('./controllers/blogs')
 const usersRouter = require('./controllers/users')
-
+const loginRouter = require('./controllers/login')
+const middleware = require('./utils/middleware')
 const config = require('./utils/config')
 mongoose.connect(config.mongoUrl).then((response)=>{
   console.log('connected to database',config.mongoUrl)
@@ -17,9 +18,10 @@ mongoose.connect(config.mongoUrl).then((response)=>{
 
 app.use(cors())
 app.use(bodyParser.json())
+app.use(middleware.tokenExtractor)
 app.use('/api/users',usersRouter)
 app.use('/api/blogs',blogsRouter)
-
+app.use('/api/login',loginRouter)
 
 const server = http.createServer(app)
 

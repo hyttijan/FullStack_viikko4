@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const usersRouter = require('express').Router()
 const User = require('../models/user')
 
@@ -32,7 +32,7 @@ usersRouter.post('/', async (request, response) => {
         passwordHash
       })
       const savedUser = await user.save()
-      response.status(201).json(savedUser)
+      response.status(201).json(User.format(savedUser))
     }
   } catch (exception) {
     response.status(500).json({ error: 'something went wrong...' })
