@@ -10,9 +10,9 @@ const usersRouter = require('./controllers/users')
 const loginRouter = require('./controllers/login')
 const middleware = require('./utils/middleware')
 const config = require('./utils/config')
-mongoose.connect(config.mongoUrl).then((response)=>{
+mongoose.connect(config.mongoUrl).then((response) => {
   console.log('connected to database',config.mongoUrl)
-}).catch((error)=>{
+}).catch((error) => {
   console.log(error)
 })
 
@@ -29,7 +29,7 @@ const PORT = config.port
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
-server.on('close',()=>{
+server.on('close',() => {
   mongoose.connection.close()
 })
 

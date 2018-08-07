@@ -23,7 +23,7 @@ loginRouter.post('/', async (request, response) => {
   }
   catch(exception){
     console.log(exception)
-    response.status(500).send({error:"Something went wrong"})
+    response.status(500).send({error:'Something went wrong'})
   }
 })
 

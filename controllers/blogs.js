@@ -2,16 +2,16 @@ const blogsRouter = require('express').Router()
 const Blog = require('../models/blog')
 const User = require('../models/user')
 const jwt = require('jsonwebtoken')
-const config = require("../utils/config")
+const config = require('../utils/config')
 
 blogsRouter.get('/', async(request, response) => {
   try{
-    blogs = await Blog.find({}).populate('user',{_id:1,username:1,name:1})
+    const blogs = await Blog.find({}).populate('user',{_id:1,username:1,name:1})
     response.json(blogs)
   }
   catch(exception){
-   console.log(exception)
-   response.status(404).json({error:'Could not retrieve data from the server'})
+    console.log(exception)
+    response.status(404).json({error:'Could not retrieve data from the server'})
   }
 })
 
@@ -51,7 +51,7 @@ blogsRouter.post('/', async(request, response) => {
   }
   
 })
-blogsRouter.put('/:id',async(request, response)=>{
+blogsRouter.put('/:id',async(request, response) => {
   try{
     const blog = {
       title: request.body.title,
@@ -59,14 +59,14 @@ blogsRouter.put('/:id',async(request, response)=>{
       url: request.body.url,
       likes:request.body.likes||0
     }
-    updatedBlog = await Blog.findByIdAndUpdate(request.params.id,blog,{ new: true })
+    const updatedBlog = await Blog.findByIdAndUpdate(request.params.id,blog,{ new: true })
     response.json(updatedBlog)
   }
   catch(exception){
     response.status(400).json({error:'malformatted id'})
   }
 })
-blogsRouter.delete("/:id",async(request, response)=>{
+blogsRouter.delete('/:id',async(request, response) => {
   try{
     const decodedToken = jwt.verify(request.token,config.secret)
     const blog = await Blog.findById(request.params.id)

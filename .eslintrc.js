@@ -6,7 +6,7 @@ module.exports = {
     },
     "extends": "eslint:recommended",
     "parserOptions": {
-        "ecmaVersion": 2016,
+        "ecmaVersion": 2017,
         "sourceType": "module"
     },
     "rules": {
@@ -26,6 +26,12 @@ module.exports = {
             "error",
             "never"
         ],
-        "no-console":0
+        "eqeqeq":"error",
+        "arrow-spacing": [
+          "error", { "before": true, "after": true }
+        ],
+        "no-unused-vars": ["error", { "vars": "all", "args": "none"}],
+        "no-console":0,
+
     }
 };
